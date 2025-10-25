@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_columns.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omalovic <omalovic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 13:27:37 by omalovic          #+#    #+#             */
-/*   Updated: 2025/10/18 15:28:57 by omalovic         ###   ########.fr       */
+/*   Updated: 2025/10/25 21:25:51 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ static void	calc_column_params(t_game *game, int x,
 	init_ray(game, x, ray);
 	perform_dda(game, ray, &params->side);
 	params->perp_wall_dist = calc_wall_distance(game, ray, params->side);
+	if (params->perp_wall_dist < 0.1)
+		params->perp_wall_dist = 0.1;
 	params->line_height = (int)(game->win_height / params->perp_wall_dist);
 	params->draw_start = -params->line_height / 2 + game->win_height / 2;
 	if (params->draw_start < 0)
